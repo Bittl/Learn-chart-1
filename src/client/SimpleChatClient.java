@@ -47,6 +47,7 @@ public class SimpleChatClient {
         Thread readerThread = new Thread(new IncomingReader());
         readerThread.start();
 
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.setSize(400, 500);
         frame.setVisible(true);
@@ -64,24 +65,25 @@ public class SimpleChatClient {
         }
     }
 
-//    public class SendButtonListener implements ActionListener{
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            try{
-//                writer.println(outgoing.getText());
-//                writer.flush();
-//            } catch (Exception e){
-//                e.printStackTrace();
-//            }
-//
-//            outgoing.setText("");
-//            outgoing.requestFocus();
-//
-//
-//        }
+    public class SendButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                writer.println(outgoing.getText());
+                writer.flush();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            outgoing.setText("");
+            outgoing.requestFocus();
 
 
+        }
     }
+
+
+
 
     public class IncomingReader implements Runnable{
         @Override
